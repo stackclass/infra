@@ -1,0 +1,52 @@
+frontend:
+  ingress:
+    enabled: true
+    annotations: {}
+    host: stackclass.dev
+    tls:
+      enabled: true
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  secrets:
+    analyticsId: ""
+    githubClientId: "<REPLACE_WITH_GITHUB_CLIENT_ID>"
+    githubClientSecret: "<REPLACE_WITH_GITHUB_CLIENT_SECRET>"
+
+backend:
+  ingress:
+    host: api.stackclass.dev
+    tls:
+      enabled: true
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+  secrets:
+    gitServerEndpoint: "git.stackclass.dev"
+    gitServerUsername: "<REPLACE_WITH_GIT_SERVER_USERNAME>"
+    gitServerPassword: "<REPLACE_WITH_GIT_SERVER_PASSWORD>"
+    gitCommitterName: "StackClass"
+    gitCommitterEmail: "hello@stackclass.dev"
+    dockerRegistryEndpoint: "docker.stackclass.dev"
+
+postgresql:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+issuer:
+  enabled: true
+  email: "hello@stackclass.dev"
+  environment: "prod"

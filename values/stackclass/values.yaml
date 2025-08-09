@@ -119,4 +119,3 @@ issuer:
 nodeSelector: {}
 tolerations: []
 affinity: {}
-
