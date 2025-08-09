@@ -1,0 +1,26 @@
+podDisruptionBudget:
+  minAvailable: 1
+
+priorityClassName: "high-priority"
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/issuer: "stackclass-issuer"
+  hosts:
+    - host: git.stackclass.dev
+      paths:
+        - path: /
+  tls:
+   - secretName: "stackclass-gitea-tls"
+     hosts:
+       - git.stackclass.dev
+gitea:
+  admin:
+    username: stackclass
+    password: r8sA8CPHD9!bt6d
+    email: "hello@stackclass.dev"
+    passwordMode: initialOnlyNoReset
+
+postgresql-ha:
+  enabled: true

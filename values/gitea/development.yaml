@@ -1,0 +1,16 @@
+ingress:
+  enabled: true
+  hosts:
+    - host: git.stackclass.local
+      paths:
+        - path: /
+
+gitea:
+  admin:
+    username: stackclass
+    password: r8sA8CPHD9!bt6d
+    email: "hello@stackclass.dev"
+    passwordMode: initialOnlyNoReset
+
+postgresql:
+  enabled: true
