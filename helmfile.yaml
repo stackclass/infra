@@ -72,3 +72,8 @@ releases:
     values:
       - "values/tekton/values.yaml"
       - "values/tekton/{{ .Environment.Name }}.yaml"
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "resources/tekton-config.yaml"]
