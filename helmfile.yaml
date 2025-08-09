@@ -16,9 +16,11 @@ environments:
   development:
     values:
       - "values/global.yaml"
+      - "values/development.yaml"
   production:
     values:
       - "values/global.yaml"
+      - "values/production.yaml"
 
 ---
 releases:
@@ -34,7 +36,7 @@ releases:
 
   # Gitea (Git repository management)
   - name: gitea
-    namespace: stackclass
+    namespace: "{{ .Values.namespace }}"
     chart: gitea-charts/gitea
     version: v12.1.3
     condition: gitea.enabled
@@ -44,7 +46,7 @@ releases:
 
   # Harbor (container image registry)
   - name: harbor
-    namespace: stackclass
+    namespace: "{{ .Values.namespace }}"
     chart: harbor/harbor
     version: 1.17.1
     condition: harbor.enabled
@@ -54,7 +56,7 @@ releases:
 
   # StackClass main application
   - name: stackclass
-    namespace: stackclass
+    namespace: "{{ .Values.namespace }}"
     chart: stackclass/stackclass
     version: 0.9.0
     values:
