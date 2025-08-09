@@ -34,7 +34,7 @@ releases:
 
   # Gitea (Git repository management)
   - name: gitea
-    namespace: gitea
+    namespace: stackclass
     chart: gitea-charts/gitea
     version: v12.1.3
     condition: gitea.enabled
@@ -44,7 +44,7 @@ releases:
 
   # Harbor (container image registry)
   - name: harbor
-    namespace: harbor
+    namespace: stackclass
     chart: harbor/harbor
     version: 1.17.1
     condition: harbor.enabled
