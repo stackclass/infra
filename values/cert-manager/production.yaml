@@ -1,0 +1,64 @@
+global:
+  priorityClassName: "system-cluster-critical"
+  podSecurityPolicy:
+    enabled: true
+    useAppArmor: true
+  logLevel: 1
+
+installCRDs: true
+crds:
+  enabled: true
+  keep: true
+
+replicaCount: 1
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+serviceAccount:
+  automountServiceAccountToken: false
+
+dns01RecursiveNameservers: "8.8.8.8:53,8.8.4.4:53"
+dns01RecursiveNameserversOnly: true
+disableAutoApproval: true
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: true
+    interval: 30s
+    scrapeTimeout: 10s
+
+webhook:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+cainjector:
+  replicaCount: 3
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
