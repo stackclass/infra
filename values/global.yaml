@@ -1,0 +1,11 @@
+cert-manager:
+  enabled: true   # Controls cert-manager installation
+
+gitea:
+  enabled: true    # Controls Gitea installation
+
+harbor:
+  enabled: true    # Controls Harbor installation
+
+tekton:
+  enabled: true    # Controls Tekton installation

@@ -1,0 +1,72 @@
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: gitea-charts
+    url: https://dl.gitea.com/charts/
+  - name: harbor
+    url: https://helm.goharbor.io
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: stackclass
+    url: https://charts.stackclass.dev
+  - name: tektoncd
+    url: git+https://github.com/tektoncd/operator@charts?ref=v0.76.0
+
+environments:
+  development:
+    values:
+      - "values/global.yaml"
+  production:
+    values:
+      - "values/global.yaml"
+
+---
+releases:
+  # Cert-Manager (optional)
+  - name: cert-manager
+    namespace: cert-manager
+    chart: jetstack/cert-manager
+    version: v1.18.2
+    condition: cert-manager.enabled
+    values:
+      - "values/cert-manager/values.yaml"
+      - "values/cert-manager/{{ .Environment.Name }}.yaml"
+
+  # Gitea (Git repository management)
+  - name: gitea
+    namespace: gitea
+    chart: gitea-charts/gitea
+    version: v12.1.3
+    condition: gitea.enabled
+    values:
+      - "values/gitea/values.yaml"
+      - "values/gitea/{{ .Environment.Name }}.yaml"
+
+  # Harbor (container image registry)
+  - name: harbor
+    namespace: harbor
+    chart: harbor/harbor
+    version: 1.17.1
+    condition: harbor.enabled
+    values:
+      - "values/harbor/values.yaml"
+      - "values/harbor/{{ .Environment.Name }}.yaml"
+
+  # StackClass main application
+  - name: stackclass
+    namespace: stackclass
+    chart: stackclass/stackclass
+    version: 0.9.0
+    values:
+      - "values/stackclass/values.yaml"
+      - "values/stackclass/{{ .Environment.Name }}.yaml"
+
+  # Tekton Operator (Tekton Pipelines)
+  - name: tekton-operator
+    namespace: tekton-pipelines
+    chart: tektoncd/tekton-operator
+    version: v0.76.0
+    condition: tekton.enabled
+    values:
+      - "values/tekton/values.yaml"
+      - "values/tekton/{{ .Environment.Name }}.yaml"

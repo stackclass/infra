@@ -1,0 +1,29 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  push:
+    paths-ignore:
+      - .github/**
+      - README.md
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Install Helmfile & Helm
+      - uses: helmfile/helmfile-action@v2.0.4
+        with:
+          helmfile-auto-init: "true"
+          helmfile-args: "version"
+
+      # Execute linting
+      - uses: taiki-e/install-action@just
+      - name: Run lint
+        run: just lint
