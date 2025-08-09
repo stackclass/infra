@@ -411,14 +411,12 @@ metrics:
     # Scrape interval. If not set, the Prometheus default scrape interval is used.
     interval: ""
     # Metric relabel configs to apply to samples before ingestion.
-    metricRelabelings:
-      []
+    metricRelabelings: []
       # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
     # Relabel configs to apply to samples before ingestion.
-    relabelings:
-      []
+    relabelings: []
       # - sourceLabels: [__meta_kubernetes_pod_node_name]
       #   separator: ;
       #   regex: ^(.*)$
@@ -626,7 +624,7 @@ core:
   tokenCert: |
   # The XSRF key. Will be generated automatically if it isn't specified
   # While you specified, Please make sure it is 32 characters, otherwise would have validation issue at the harbor-core runtime
-  # https://github.com/goharbor/harbor/pull/21154 
+  # https://github.com/goharbor/harbor/pull/21154
   xsrfKey: ""
   # If using existingSecret, the key is defined by core.existingXsrfSecretKey
   existingXsrfSecret: ""
@@ -1066,4 +1064,3 @@ exporter:
   #   whenUnsatisfiable: DoNotSchedule
   cacheDuration: 23
   cacheCleanInterval: 14400
-

@@ -1,0 +1,23 @@
+expose:
+  type: ingress
+  tls:
+    enabled: false
+  ingress:
+    hosts:
+      core: docker.stackclass.local
+
+externalURL: http://docker.stackclass.local
+
+existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
+harborAdminPassword: "Harbor12345"
+
+trivy:
+  enabled: false
+
+database:
+  type: internal
+  internal:
+    password: "changeit"
+
+redis:
+  type: internal

@@ -1,0 +1,26 @@
+expose:
+  type: ingress
+  tls:
+    enabled: true
+  ingress:
+    hosts:
+      core: docker.stackclass.dev
+
+externalURL: https://docker.stackclass.dev
+
+existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
+harborAdminPassword: "Harbor12345"
+
+trivy:
+  enabled: false
+
+cache:
+  enabled: true
+
+database:
+  type: internal
+  internal:
+    password: "changeit"
+
+redis:
+  type: internal
