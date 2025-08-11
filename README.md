@@ -12,6 +12,8 @@ Before deploying, ensure you have the following tools installed:
 - `kubectl` - configured to access your Kubernetes cluster.
 - `helm` - package manager for Kubernetes applications.
 - `helmfile` - declarative spec for deploying Helm charts.
+- `yq` - YAML processor for command-line operations. (optional)
+- `jq` - Lightweight command-line JSON processor. (optional)
 
 ## Installation
 
@@ -52,47 +54,62 @@ For environment-specific overrides, edit the corresponding files under
 
 ## Usage
 
-### Deploy All Services
+### Full Installation / Uninstallation
 
-To deploy all services for the default environment:
+1. **Install all services for an environment** (e.g., `development` or `production`):
+   This will sync all releases defined in `helmfile.yaml` for the specified
+   environment.
 
-```bash
-helmfile sync
-```
+   ```bash
+   just install development  # or `just install production`
+   ```
 
-To deploy all services for a specific environment (e.g., `development`):
+2. **Uninstall all services for an environment**:
+   This will destroy all releases for the specified environment.
 
-```bash
-helmfile --environments <environment-name> sync
-```
+   ```bash
+   just uninstall development  # or `just uninstall production`
+   ```
 
-### Deploy a Specific Service
+### Tier-Based Operations
 
-To deploy a single service (e.g., `cert-manager`) for the default environment:
+Use the `tier` and `environment` **positional arguments** to target specific
+tiers (`common`, `deps`, or `app`) for granular control.
 
-```bash
-helmfile -l name=<service-name> sync
-```
+1. **Apply changes for a tier** (e.g., `common` infrastructure components): This
+will apply changes (create/update) for the specified tier in the given
+environment.
 
-To deploy a single service for a specific environment:
+   ```bash
+   just apply common development  # tier=common, environment=development
+   ```
 
-```bash
-helmfile --environments <environment-name> -l name=<service-name> sync
-```
+2. **Sync a tier** (e.g., `deps` dependencies):
+   This will synchronize the state of the specified tier in the given
+   environment.
+
+   ```bash
+   just sync deps production  # tier=deps, environment=production
+   ```
+
+3. **Destroy a tier** (e.g., `app` main application):
+   This will uninstall all releases in the specified tier for the given
+   environment.
+
+   ```bash
+   just destroy app development  # tier=app, environment=development
+   ```
 
 ### Additional Commands
 
-- **Dry Run**: Preview changes without applying them:
+- **Dry Run**:
+  Preview changes for a tier without applying them:
 
   ```bash
-  helmfile --environments <environment-name> apply --dry-run
+  helmfile --environment <env> --selector tier=<tier> apply --dry-run
   ```
 
-- **Destroy Services**: Remove all deployed releases (use with caution):
-
-  ```bash
-  helmfile destroy
-  ```
+###
 
 ## Development
 
@@ -101,9 +118,6 @@ helmfile --environments <environment-name> -l name=<service-name> sync
 This task is intended for maintainers to fetch the default values of Helm
 charts. It should be run whenever the Helm chart versions are updated in
 `helmfile.yaml`.
-
-**IMPORTANT**: If you upgrade any chart version in `helmfile.yaml`, make sure to
-update the corresponding version in this task as well.
 
 ```bash
 just fetch-default-values
