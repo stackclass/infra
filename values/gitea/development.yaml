@@ -12,8 +12,23 @@ gitea:
     email: "hello@stackclass.dev"
     passwordMode: initialOnlyNoReset
 
+valkey-cluster:
+  enabled: false
+
+valkey:
+  enabled: true
+  global:
+    valkey:
+      password: changeme
+
 postgresql-ha:
   enabled: false
 
 postgresql:
   enabled: true
+  global:
+    postgresql:
+      auth:
+        database: gitea
+        username: gitea
+        password: gitea

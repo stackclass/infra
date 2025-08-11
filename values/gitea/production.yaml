@@ -1,8 +1,3 @@
-podDisruptionBudget:
-  minAvailable: 1
-
-priorityClassName: "high-priority"
-
 ingress:
   enabled: true
   annotations:
@@ -17,10 +12,28 @@ ingress:
        - git.stackclass.dev
 gitea:
   admin:
-    username: stackclass
-    password: r8sA8CPHD9!bt6d
-    email: "hello@stackclass.dev"
+    username: "<REPLACE_WITH_GIT_SERVER_USERNAME>"
+    password: <REPLACE_WITH_GIT_SERVER_PASSWORD>
+    email: "<REPLACE_WITH_GIT_SERVER_EMAIL>"
     passwordMode: initialOnlyNoReset
 
-postgresql-ha:
+valkey-cluster:
+  enabled: false
+
+valkey:
   enabled: true
+  global:
+    valkey:
+      password: "<REPLACE_WITH_VALKEY_PASSWORD>"
+
+postgresql-ha:
+  enabled: false
+
+postgresql:
+  enabled: true
+  global:
+    postgresql:
+      auth:
+        database: gitea
+        username: gitea
+        password: "<REPLACE_WITH_GITEA_DB_PASSWORD>"
