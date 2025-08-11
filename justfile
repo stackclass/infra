@@ -31,7 +31,27 @@ fetch-default-values:
     helm show values jetstack/cert-manager --version v1.18.2 > values/cert-manager/values.yaml
     helm show values gitea-charts/gitea --version v12.1.3 > values/gitea/values.yaml
     helm show values harbor/harbor --version 1.17.1 > values/harbor/values.yaml
-    helm show values stackclass/stackclass --version 0.9.0 > values/stackclass/values.yaml
+    helm show values stackclass/stackclass --version 0.10.6 > values/stackclass/values.yaml
     helm show values tektoncd/tekton-operator --version v0.76.0 > values/tekton/values.yaml
 
     echo "Default values files have been generated successfully."
+
+# Install all releases (sync) for a specific environment
+install environment:
+    helmfile --environment {{environment}} sync
+
+# Uninstall all releases (destroy) for a specific environment
+uninstall environment:
+    helmfile --environment {{environment}} destroy
+
+# Apply the stackclass release for a specific environment
+apply environment:
+    helmfile --environment {{environment}} --selector name=stackclass apply
+
+# Sync the stackclass release for a specific environment
+sync environment:
+    helmfile --environment {{environment}} --selector name=stackclass sync
+
+# Destroy the stackclass release for a specific environment
+destroy environment:
+    helmfile --environment {{environment}} --selector name=stackclass destroy
