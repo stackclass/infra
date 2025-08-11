@@ -8,7 +8,6 @@ expose:
 
 externalURL: http://docker.stackclass.local
 
-existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
 harborAdminPassword: "Harbor12345"
 
 trivy:

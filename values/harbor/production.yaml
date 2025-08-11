@@ -2,14 +2,22 @@ expose:
   type: ingress
   tls:
     enabled: true
+    certSource: secret
+    secret:
+      secretName: "stackclass-harbor-tls"
   ingress:
     hosts:
       core: docker.stackclass.dev
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      cert-manager.io/issuer: "stackclass-issuer"
 
 externalURL: https://docker.stackclass.dev
 
-existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
-harborAdminPassword: "Harbor12345"
+harborAdminPassword: "<REPLACE_WITH_HARBOR_ADMIN_PASSWORD>"
 
 trivy:
   enabled: false
@@ -20,7 +28,7 @@ cache:
 database:
   type: internal
   internal:
-    password: "changeit"
+    password: "<REPLACE_WITH_HARBOR_DB_PASSWORD>"
 
 redis:
   type: internal
