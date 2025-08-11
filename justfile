@@ -21,14 +21,14 @@ install environment:
 uninstall environment:
     helmfile --environment {{environment}} destroy
 
-# Apply the stackclass release for a specific environment
-apply environment:
-    helmfile --environment {{environment}} --selector name=stackclass apply
+# Apply releases for a specific tier and environment
+apply tier environment:
+    helmfile --environment {{environment}} --selector tier={{tier}} apply
 
-# Sync the stackclass release for a specific environment
-sync environment:
-    helmfile --environment {{environment}} --selector name=stackclass sync
+# Sync releases for a specific tier and environment
+sync tier environment:
+    helmfile --environment {{environment}} --selector tier={{tier}} sync
 
-# Destroy the stackclass release for a specific environment
-destroy environment:
-    helmfile --environment {{environment}} --selector name=stackclass destroy
+# Destroy releases for a specific tier and environment
+destroy tier environment:
+    helmfile --environment {{environment}} --selector tier={{tier}} destroy
