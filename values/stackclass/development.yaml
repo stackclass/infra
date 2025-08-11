@@ -1,13 +1,6 @@
 frontend:
   ingress:
     host: stackclass.local
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 50m
-      memory: 64Mi
   secrets:
     analyticsId: ""
     githubClientId: "<REPLACE_WITH_GITHUB_CLIENT_ID>"
@@ -16,26 +9,8 @@ frontend:
 backend:
   ingress:
     host: api.stackclass.local
-  resources:
-    limits:
-      cpu: 100m
-      memory: 128Mi
-    requests:
-      cpu: 50m
-      memory: 64Mi
   secrets:
-    gitServerEndpoint: "git.stackclass.local"
+    gitServerEndpoint: "http://git.stackclass.local"
     gitServerUsername: "<REPLACE_WITH_GIT_SERVER_USERNAME>"
     gitServerPassword: "<REPLACE_WITH_GIT_SERVER_PASSWORD>"
-    gitCommitterName: "StackClass"
-    gitCommitterEmail: "hello@stackclass.dev"
     dockerRegistryEndpoint: "docker.stackclass.local"
-
-postgresql:
-  resources:
-    limits:
-      cpu: 200m
-      memory: 256Mi
-    requests:
-      cpu: 100m
-      memory: 128Mi
