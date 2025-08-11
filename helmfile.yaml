@@ -24,41 +24,65 @@ environments:
 
 ---
 releases:
-  # Cert-Manager (optional)
+  # Common Tier: Infrastructure components
   - name: cert-manager
     namespace: cert-manager
     chart: jetstack/cert-manager
     version: v1.18.2
     condition: cert-manager.enabled
+    labels:
+      tier: common
     values:
       - "values/cert-manager/values.yaml"
       - "values/cert-manager/{{ .Environment.Name }}.yaml"
 
-  # Gitea (Git repository management)
+  - name: tekton-operator
+    namespace: tekton-operator
+    chart: tektoncd/tekton-operator
+    version: v0.76.0
+    condition: tekton.enabled
+    labels:
+      tier: common
+    values:
+      - "values/tekton-operator/values.yaml"
+      - "values/tekton-operator/{{ .Environment.Name }}.yaml"
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "kubectl"
+        args: ["apply", "-f", "resources/tekton-config.yaml"]
+    wait: true
+
+  # Deps Tier: Dependencies for the application
   - name: gitea
     namespace: "{{ .Values.namespace }}"
     chart: gitea-charts/gitea
     version: v12.1.3
     condition: gitea.enabled
+    labels:
+      tier: deps
     values:
       - "values/gitea/values.yaml"
       - "values/gitea/{{ .Environment.Name }}.yaml"
 
-  # Harbor (container image registry)
   - name: harbor
     namespace: "{{ .Values.namespace }}"
     chart: harbor/harbor
     version: 1.17.1
     condition: harbor.enabled
+    labels:
+      tier: deps
     values:
       - "values/harbor/values.yaml"
       - "values/harbor/{{ .Environment.Name }}.yaml"
 
-  # StackClass main application
+  # App Tier: Main application
   - name: stackclass
     namespace: "{{ .Values.namespace }}"
     chart: stackclass/stackclass
     version: 0.10.6
+    labels:
+      tier: app
     needs:
       - cert-manager/cert-manager
       - gitea
@@ -67,19 +91,3 @@ releases:
     values:
       - "values/stackclass/values.yaml"
       - "values/stackclass/{{ .Environment.Name }}.yaml"
-
-  # Tekton Operator (Tekton Pipelines)
-  - name: tekton-operator
-    namespace: tekton-operator
-    chart: tektoncd/tekton-operator
-    version: v0.76.0
-    condition: tekton.enabled
-    values:
-      - "values/tekton/values.yaml"
-      - "values/tekton/{{ .Environment.Name }}.yaml"
-    hooks:
-      - events: ["postsync"]
-        showlogs: true
-        command: "kubectl"
-        args: ["apply", "-f", "resources/tekton-config.yaml"]
-    wait: true
