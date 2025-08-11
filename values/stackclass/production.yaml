@@ -5,7 +5,7 @@ frontend:
     tls:
       enabled: true
   secrets:
-    analyticsId: ""
+    analyticsId: "<REPLACE_WITH_ANALYTICS_ID>"
     githubClientId: "<REPLACE_WITH_GITHUB_CLIENT_ID>"
     githubClientSecret: "<REPLACE_WITH_GITHUB_CLIENT_SECRET>"
 
@@ -20,7 +20,14 @@ backend:
     gitServerPassword: "<REPLACE_WITH_GIT_SERVER_PASSWORD>"
     dockerRegistryEndpoint: "docker.stackclass.dev"
 
+postgresql:
+  enabled: true
+  auth:
+    username: stackclass
+    database: stackclass
+    password: "<REPLACE_WITH_SC_DB_USERNAME>"
+
 issuer:
   enabled: true
-  email: "hello@stackclass.dev"
+  email: "<REPLACE_WITH_ISSUER_EMAIL>"
   environment: "prod"
