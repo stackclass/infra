@@ -58,14 +58,19 @@ releases:
   - name: stackclass
     namespace: "{{ .Values.namespace }}"
     chart: stackclass/stackclass
-    version: 0.9.0
+    version: 0.10.6
+    needs:
+      - cert-manager/cert-manager
+      - gitea
+      - harbor
+      - tekton-operator/tekton-operator
     values:
       - "values/stackclass/values.yaml"
       - "values/stackclass/{{ .Environment.Name }}.yaml"
 
   # Tekton Operator (Tekton Pipelines)
   - name: tekton-operator
-    namespace: tekton-pipelines
+    namespace: tekton-operator
     chart: tektoncd/tekton-operator
     version: v0.76.0
     condition: tekton.enabled
@@ -77,3 +82,4 @@ releases:
         showlogs: true
         command: "kubectl"
         args: ["apply", "-f", "resources/tekton-config.yaml"]
+    wait: true
