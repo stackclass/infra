@@ -12,5 +12,8 @@ gitea:
     email: "hello@stackclass.dev"
     passwordMode: initialOnlyNoReset
 
+postgresql-ha:
+  enabled: false
+
 postgresql:
   enabled: true

@@ -5,7 +5,6 @@ global:
     useAppArmor: true
   logLevel: 1
 
-installCRDs: true
 crds:
   enabled: true
   keep: true

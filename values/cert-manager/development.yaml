@@ -1,7 +1,6 @@
 global:
   logLevel: 2
 
-installCRDs: true
 crds:
   enabled: true
   keep: false
