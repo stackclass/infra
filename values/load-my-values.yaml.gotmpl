@@ -1,0 +1,7 @@
+{{- $releaseName := .Release.Name }}
+{{- $envName := .Environment.Name }}
+{{- $myValuesPath := printf "%s/my-%s.yaml" $releaseName $envName }}
+
+{{- if isFile $myValuesPath }}
+{{ readFile $myValuesPath | fromYaml | toYaml }}
+{{- end }}

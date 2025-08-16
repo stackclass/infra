@@ -35,6 +35,7 @@ releases:
     values:
       - "values/cert-manager/values.yaml"
       - "values/cert-manager/{{ .Environment.Name }}.yaml"
+      - "values/load-my-values.yaml.gotmpl"
 
   - name: tekton-operator
     namespace: tekton-operator
@@ -46,6 +47,7 @@ releases:
     values:
       - "values/tekton-operator/values.yaml"
       - "values/tekton-operator/{{ .Environment.Name }}.yaml"
+      - "values/load-my-values.yaml.gotmpl"
     hooks:
       - events: ["postsync"]
         showlogs: true
@@ -64,6 +66,7 @@ releases:
     values:
       - "values/gitea/values.yaml"
       - "values/gitea/{{ .Environment.Name }}.yaml"
+      - "values/load-my-values.yaml.gotmpl"
 
   - name: harbor
     namespace: "{{ .Values.namespace }}"
@@ -75,6 +78,7 @@ releases:
     values:
       - "values/harbor/values.yaml"
       - "values/harbor/{{ .Environment.Name }}.yaml"
+      - "values/load-my-values.yaml.gotmpl"
 
   # App Tier: Main application
   - name: stackclass
@@ -91,3 +95,4 @@ releases:
     values:
       - "values/stackclass/values.yaml"
       - "values/stackclass/{{ .Environment.Name }}.yaml"
+      - "values/load-my-values.yaml.gotmpl"
