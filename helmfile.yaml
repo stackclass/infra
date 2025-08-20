@@ -96,3 +96,21 @@ releases:
       - "values/stackclass/values.yaml"
       - "values/stackclass/{{ .Environment.Name }}.yaml"
       - "values/load-my-values.yaml.gotmpl"
+    hooks:
+      - events: ["postsync"]
+        showlogs: true
+        command: "tkn"
+        args:
+          [
+            "hub",
+            "install",
+            "task",
+            "git-clone",
+            "-n",
+            "{{ .Values.namespace }}",
+          ]
+      - events: ["postsync"]
+        showlogs: true
+        command: "tkn"
+        args:
+          ["hub", "install", "task", "buildah", "-n", "{{ .Values.namespace }}"]
