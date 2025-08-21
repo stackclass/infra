@@ -84,7 +84,7 @@ releases:
   - name: stackclass
     namespace: "{{ .Values.namespace }}"
     chart: stackclass/stackclass
-    version: 0.11.0
+    version: 0.15.0
     labels:
       tier: app
     needs:
@@ -96,21 +96,3 @@ releases:
       - "values/stackclass/values.yaml"
       - "values/stackclass/{{ .Environment.Name }}.yaml"
       - "values/load-my-values.yaml.gotmpl"
-    hooks:
-      - events: ["postsync"]
-        showlogs: true
-        command: "tkn"
-        args:
-          [
-            "hub",
-            "install",
-            "task",
-            "git-clone",
-            "-n",
-            "{{ .Values.namespace }}",
-          ]
-      - events: ["postsync"]
-        showlogs: true
-        command: "tkn"
-        args:
-          ["hub", "install", "task", "buildah", "-n", "{{ .Values.namespace }}"]
