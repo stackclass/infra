@@ -3,13 +3,13 @@ ingress:
   annotations:
     cert-manager.io/issuer: "stackclass-issuer"
   hosts:
-    - host: git.stackclass.dev
+    - host: repo.stackclass.dev
       paths:
         - path: /
   tls:
-   - secretName: "stackclass-gitea-tls"
-     hosts:
-       - git.stackclass.dev
+    - secretName: "stackclass-gitea-tls"
+      hosts:
+        - repo.stackclass.dev
 gitea:
   admin:
     username: "<REPLACE_WITH_GIT_SERVER_USERNAME>"

@@ -11,11 +11,14 @@ frontend:
 
 backend:
   ingress:
-    host: api.stackclass.dev
+    hosts:
+      api: api.stackclass.dev
+      git: git.stackclass.dev
     tls:
       enabled: true
   secrets:
-    gitServerEndpoint: "https://git.stackclass.dev"
+    gitProxyEndpoint: "https://git.stackclass.dev"
+    gitServerEndpoint: "https://repo.stackclass.dev"
     gitServerUsername: "<REPLACE_WITH_GIT_SERVER_USERNAME>"
     gitServerPassword: "<REPLACE_WITH_GIT_SERVER_PASSWORD>"
     dockerRegistryEndpoint: "docker.stackclass.dev"

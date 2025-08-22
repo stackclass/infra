@@ -1,7 +1,7 @@
 ingress:
   enabled: true
   hosts:
-    - host: git.stackclass.local
+    - host: repo.stackclass.local
       paths:
         - path: /
 

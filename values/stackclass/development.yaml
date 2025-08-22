@@ -8,9 +8,12 @@ frontend:
 
 backend:
   ingress:
-    host: api.stackclass.local
+    hosts:
+      api: api.stackclass.local
+      git: git.stackclass.local
   secrets:
-    gitServerEndpoint: "http://git.stackclass.local"
+    gitProxyEndpoint: "http://git.stackclass.local"
+    gitServerEndpoint: "http://repo.stackclass.local"
     gitServerUsername: "<REPLACE_WITH_GIT_SERVER_USERNAME>"
     gitServerPassword: "<REPLACE_WITH_GIT_SERVER_PASSWORD>"
     dockerRegistryEndpoint: "docker.stackclass.local"
