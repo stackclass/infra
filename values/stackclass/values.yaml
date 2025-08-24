@@ -78,10 +78,9 @@ backend:
     gitServerPassword: "<REPLACE_WITH_GIT_SERVER_PASSWORD>"
     gitCommitterName: "StackClass"
     gitCommitterEmail: "hello@stackclass.dev"
-    dockerRegistryEndpoint: "docker.stackclass.local"
+    dockerRegistryEndpoint: "http://docker.stackclass.local"
     dockerRegistryUsername: "<REPLACE_WITH_DOCKER_REGISTRY_USERNAME>"
     dockerRegistryPassword: "<REPLACE_WITH_DOCKER_REGISTRY_PASSWORD>"
-    authSecret: "<REPLACE_WITH_AUTH_SECRET>"
 
 # PostgreSQL configurations
 postgresql:
