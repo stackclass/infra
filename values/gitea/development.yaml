@@ -7,7 +7,7 @@ ingress:
 
 gitea:
   admin:
-    username: stackclass
+    username: admin
     password: r8sA8CPHD9!bt6d
     email: "admin@stackclass.dev"
     passwordMode: initialOnlyNoReset

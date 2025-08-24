@@ -1,7 +1,7 @@
 ingress:
   enabled: true
   annotations:
-    cert-manager.io/issuer: "stackclass-issuer"
+    cert-manager.io/cluster-issuer: "stackclass-cluster-issuer"
   hosts:
     - host: repo.stackclass.dev
       paths:

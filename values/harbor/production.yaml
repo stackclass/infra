@@ -13,7 +13,7 @@ expose:
       ingress.kubernetes.io/proxy-body-size: "0"
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
       nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      cert-manager.io/issuer: "stackclass-issuer"
+      cert-manager.io/cluster-issuer: "stackclass-cluster-issuer"
 
 externalURL: https://docker.stackclass.dev
 
