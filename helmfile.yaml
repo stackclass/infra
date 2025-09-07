@@ -84,7 +84,7 @@ releases:
   - name: stackclass
     namespace: "{{ .Values.namespace }}"
     chart: stackclass/stackclass
-    version: 1.0.2
+    version: 1.0.3
     labels:
       tier: app
     needs:
