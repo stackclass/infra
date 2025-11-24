@@ -15,7 +15,7 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Install Helmfile & Helm
       - uses: helmfile/helmfile-action@v2.0.4
