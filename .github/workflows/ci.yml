@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v6
 
       # Install Helmfile & Helm
-      - uses: helmfile/helmfile-action@v2.3.1
+      - uses: helmfile/helmfile-action@v2.4.0
         with:
           helmfile-auto-init: "true"
           helmfile-args: "version"
